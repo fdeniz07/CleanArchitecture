@@ -18,7 +18,7 @@ namespace CleanArchitecture.Application.Features.CarFeatures.Commands.CreateCar
         {
             //islemler
             await _carService.CreateAsync(request, cancellationToken);
-            return new("Arac basariyla üretildi!");
+            return new("Arac basariyla kaydedildi!");
         }
     }
 }
