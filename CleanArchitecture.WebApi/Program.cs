@@ -17,14 +17,24 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddTransient<ExceptionMiddleware>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork<AppDbContext>>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddAutoMapper(typeof(CleanArchitecture.Persistance.AssemblyReference).Assembly);
 
+
 string connectionString = builder.Configuration.GetConnectionString("SqlServer");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    //Option 2: The Password can be changed like this
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 3;
+    options.Password.RequireUppercase = false;
+
+}).AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(CleanArchitecture.Presentation.AssemblyReference).Assembly);

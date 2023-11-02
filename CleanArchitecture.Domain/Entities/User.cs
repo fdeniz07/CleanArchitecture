@@ -9,7 +9,7 @@ namespace CleanArchitecture.Domain.Entities
             Id = Guid.NewGuid().ToString();
         }
 
-        public string Fullname { get; set; }
+        public string FullName { get; set; }
 
     }
 }
