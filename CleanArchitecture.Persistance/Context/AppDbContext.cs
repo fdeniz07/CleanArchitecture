@@ -1,9 +1,12 @@
 ﻿using CleanArchitecture.Domain.Abstraction;
+using CleanArchitecture.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Persistance.Context
 {
-    public sealed class AppDbContext : DbContext
+    public sealed class AppDbContext : IdentityDbContext<User, IdentityRole, string> //DbContext
     {
 
         // I. Yol
@@ -24,8 +27,18 @@ namespace CleanArchitecture.Persistance.Context
         public AppDbContext(DbContextOptions options) : base(options) { }
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AssemblyReference).Assembly);
+
+            modelBuilder.Ignore<IdentityUserLogin<string>>();
+            modelBuilder.Ignore<IdentityUserRole<string>>();
+            modelBuilder.Ignore<IdentityUserClaim<string>>();
+            modelBuilder.Ignore<IdentityUserToken<string>>();
+            modelBuilder.Ignore<IdentityRoleClaim<string>>();
+            modelBuilder.Ignore<IdentityRole<string>>();
+        }
+
 
 
         //Kayit isleminde (ekleme ve güncellemede ilgili alanlari otomatik ekleme)
