@@ -48,6 +48,7 @@ namespace CleanArchitecture.Persistance.Service
         {
             PaginationResult<Car> cars = await _carRepository
                 .GetWhere(c => c.Name.ToLower().Contains(request.Search.ToLower()))
+                .OrderBy(c=>c.Name)
                 .ToPagedListAsync(request.PageNumber, request.PageSize, cancellationToken);
             return cars;
         }
