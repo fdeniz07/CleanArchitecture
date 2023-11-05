@@ -2,12 +2,14 @@ using CleanArchitecture.Application.Behaviors;
 using CleanArchitecture.Application.Service;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Domain.Repositories;
+using CleanArchitecture.Infrastructure.Authentication;
 using CleanArchitecture.Infrastructure.Service;
 using CleanArchitecture.Persistance.Context;
 using CleanArchitecture.Persistance.Repositories;
 using CleanArchitecture.Persistance.Service;
 using CleanArchitecture.WebApi.Middleware;
 using CleanArchitecture.WebApi.Middleware.Extensions;
+using CleanArchitecture.WebApi.OptionsSetup;
 using FluentValidation;
 using GenericRepository;
 using MediatR;
@@ -26,6 +28,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork<AppDbContext>>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddAutoMapper(typeof(CleanArchitecture.Persistance.AssemblyReference).Assembly);
 
+builder.Services.ConfigureOptions<JwtOptions>();
+builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
+
+builder.Services.AddAuthentication().AddJwtBearer();
 
 string connectionString = builder.Configuration.GetConnectionString("SqlServer");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
