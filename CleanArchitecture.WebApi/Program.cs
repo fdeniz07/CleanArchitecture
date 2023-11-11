@@ -1,3 +1,4 @@
+using CleanArchitecture.Application.Abstraction;
 using CleanArchitecture.Application.Behaviors;
 using CleanArchitecture.Application.Service;
 using CleanArchitecture.Domain.Entities;
@@ -26,12 +27,15 @@ builder.Services.AddScoped<IMailService, MailService>();
 builder.Services.AddTransient<ExceptionMiddleware>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork<AppDbContext>>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
-builder.Services.AddAutoMapper(typeof(CleanArchitecture.Persistance.AssemblyReference).Assembly);
 
-builder.Services.ConfigureOptions<JwtOptions>();
+builder.Services.AddScoped<IJwtProvider, JwtProvider>();
+
+builder.Services.ConfigureOptions<JwtOptionsSetup>();
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 
 builder.Services.AddAuthentication().AddJwtBearer();
+
+builder.Services.AddAutoMapper(typeof(CleanArchitecture.Persistance.AssemblyReference).Assembly);
 
 string connectionString = builder.Configuration.GetConnectionString("SqlServer");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));

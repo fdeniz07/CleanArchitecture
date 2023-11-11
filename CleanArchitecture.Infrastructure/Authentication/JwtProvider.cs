@@ -54,10 +54,7 @@ namespace CleanArchitecture.Infrastructure.Authentication
                 token,
                 refreshToken,
                 user.RefreshTokenExpires,
-                user.Id,
-                user.UserName,
-                user.FullName,
-                user.Email
+                user.Id
             );
 
             return response;
