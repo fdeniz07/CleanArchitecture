@@ -3,11 +3,11 @@ using Microsoft.Extensions.Options;
 
 namespace CleanArchitecture.WebApi.OptionsSetup
 {
-    public sealed class JwtOptioinsSetup : IConfigureOptions<JwtOptions>
+    public sealed class JwtOptionsSetup : IConfigureOptions<JwtOptions>
     {
         private readonly IConfiguration _configuration;
 
-        public JwtOptioinsSetup(IConfiguration configuration)
+        public JwtOptionsSetup(IConfiguration configuration)
         {
             _configuration = configuration;
         }
