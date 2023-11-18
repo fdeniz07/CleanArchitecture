@@ -16,7 +16,7 @@ namespace CleanArchitecture.Presentation.Controllers
         }
 
         [HttpPost("[action]")]
-        [AllowAnonymous]
+        [AllowAnonymous] //Bu bize unauthorized (401) hatasi almamizi engelleyecektir. 
         public async Task<IActionResult> Register(RegisterCommand request, CancellationToken cancellationToken)
         {
             MessageResponse response = await _mediator.Send(request, cancellationToken);

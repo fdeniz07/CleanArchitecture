@@ -5,10 +5,12 @@ using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Presentation.Abstraction;
 using EntityFrameworkCorePagination.Nuget.Pagination;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Presentation.Controllers
 {
+   /* [Authorize(AuthenticationSchemes = "Bearer")]*/ //Authorization islemlerini tek tek controller bazinda yapmak istemedigimden, ApiController'e bu annotation'u ekliyorum
     public sealed class CarsController : ApiController
     {
         //private readonly AppDbContext _context;
