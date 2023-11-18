@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Presentation.Controllers
 {
-    [Authorize(AuthenticationSchemes = "Bearer")]
+   /* [Authorize(AuthenticationSchemes = "Bearer")]*/ //Authorization islemlerini tek tek controller bazinda yapmak istemedigimden, ApiController'e bu annotation'u ekliyorum
     public sealed class CarsController : ApiController
     {
         //private readonly AppDbContext _context;
