@@ -32,6 +32,7 @@ namespace CleanArchitecture.Presentation.Controllers
         }
 
         [HttpPost("[action]")]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateTokenByRefreshToken(CreateNewTokenByRefreshTokenCommand request, CancellationToken cancellationToken)
         {
             LoginCommandResponse response = await _mediator.Send(request, cancellationToken);
