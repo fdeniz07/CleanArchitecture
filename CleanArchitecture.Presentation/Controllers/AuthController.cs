@@ -16,7 +16,7 @@ namespace CleanArchitecture.Presentation.Controllers
         }
 
         [HttpPost("[action]")]
-        [AllowAnonymous] //Bu bize unauthorized (401) hatasi almamizi engelleyecektir. 
+        [AllowAnonymous] //Bu bize unauthorized (401) hatasi almamizi engelleyecektir.
         public async Task<IActionResult> Register(RegisterCommand request, CancellationToken cancellationToken)
         {
             MessageResponse response = await _mediator.Send(request, cancellationToken);
@@ -32,7 +32,6 @@ namespace CleanArchitecture.Presentation.Controllers
         }
 
         [HttpPost("[action]")]
-        [AllowAnonymous]
         public async Task<IActionResult> CreateTokenByRefreshToken(CreateNewTokenByRefreshTokenCommand request, CancellationToken cancellationToken)
         {
             LoginCommandResponse response = await _mediator.Send(request, cancellationToken);
